@@ -1,0 +1,2 @@
+# easycalc
+learn to count :)
