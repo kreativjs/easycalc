@@ -11,7 +11,8 @@ const displayedString = displayed.textContent;
 
 let memory = displayedString;
 let secondNumber = 0;
-let complete = false;
+let hasDecimal = false;
+let completed = false;
 let operator = '';
 let result;
 
@@ -35,8 +36,9 @@ let updateDisplay = () => {
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         let memoryInt = parseFloat(memory);
+        console.log(memoryInt)
         if (operator === '') {
-            if (memoryInt === 0 && complete == false) {
+            if (memoryInt === 0 && memory !== '0.') {
                 memory = button.value;
                 console.log('The first number is: ' + memory);
                 console.log('The first number is of type: ' + typeof memory);
@@ -82,6 +84,9 @@ decimalButton.addEventListener('click', () => {
     if (operator === '') {
         if (memoryString.includes('.') == false) {
             memory += '.';
+            console.log(memory)
+            console.log(parseFloat(memory))
+            hasDecimal = true;
             updateDisplay();
         }
         else updateDisplay();
@@ -93,6 +98,7 @@ decimalButton.addEventListener('click', () => {
         }
         else updateDisplay();
     }
+    console.log(hasDecimal, completed)
 })
 
 invertButton.addEventListener('click', () => {
@@ -104,8 +110,8 @@ invertButton.addEventListener('click', () => {
 clearButton.addEventListener('click', () => {
     memory = 0;
     result = 0;
-    complete = false;
     operator = '';
+    hasDecimal = false;
     updateDisplay();
 });
 
@@ -138,7 +144,6 @@ let equalize = () => {
     operator = '';
     memory = result;
     console.log('Memory on equals: ' + memory);
-    complete = true;
     document.getElementById('display').innerText = memory;
 };
 
