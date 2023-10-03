@@ -108,6 +108,7 @@ equalsButton.addEventListener('click', () => {
         case '/':
             if (parseFloat(secondNumber) === 0) {
                 result = 1;
+                alert('Hey! Stop that...')
                 break;
             }
             else {
