@@ -3,7 +3,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const decimalButton = document.querySelector('.decimal');
 const clearButton = document.querySelector('.clear');
 const invertButton = document.querySelector('.sign');
-const percentButton = document.querySelector('.percent');
+const percentButton = document.querySelector('#percent');
 const equalsButton = document.querySelector('#equals');
 const displayed = document.querySelector('#display');
 const displayedInt = parseInt(displayed.textContent);
@@ -114,6 +114,11 @@ clearButton.addEventListener('click', () => {
     hasDecimal = false;
     updateDisplay();
 });
+
+percentButton.addEventListener('click', () => {
+    memory *= 0.01;
+    updateDisplay();
+})
 
 let equalize = () => {
     switch (operator) {
