@@ -64,8 +64,14 @@ numberButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
-        operator = button.value;
-        secondNumber = 0;
+        if (secondNumber === 0) {
+            operator = button.value;
+            secondNumber = 0;
+        }
+        else {
+            equalize();
+            operator = button.value;
+        }
         console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
     })
 })
@@ -101,9 +107,9 @@ clearButton.addEventListener('click', () => {
     complete = false;
     operator = '';
     updateDisplay();
-})
+});
 
-equalsButton.addEventListener('click', () => {
+let equalize = () => {
     switch (operator) {
         case '/':
             if (parseFloat(secondNumber) === 0) {
@@ -134,4 +140,8 @@ equalsButton.addEventListener('click', () => {
     console.log('Memory on equals: ' + memory);
     complete = true;
     document.getElementById('display').innerText = memory;
-})
+};
+
+equalsButton.addEventListener('click', () => {
+    equalize();
+});
