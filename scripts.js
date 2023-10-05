@@ -6,6 +6,7 @@ const invertButton = document.querySelector('.sign');
 const percentButton = document.querySelector('#percent');
 const equalsButton = document.querySelector('#equals');
 const displayed = document.querySelector('#display');
+const backspaceButton = document.querySelector('#backspace');
 const displayedInt = parseInt(displayed.textContent);
 const displayedString = displayed.textContent;
 
@@ -25,11 +26,11 @@ let multiplication = () => result = parseFloat(memory) * parseFloat(secondNumber
 let division = () => result = parseFloat(memory) / parseFloat(secondNumber);
 
 let updateDisplay = () => {
-    if (operator === '') {
-        document.getElementById('display').innerText = memory;
+    if (operator === "") {
+        document.getElementById('display').innerText = memory;        
     }
-    else {
-        document.getElementById('display').innerText = secondNumber;
+    else {        
+        document.getElementById('display').innerText = memory + operator + secondNumber;             
     }
 }
 
@@ -66,15 +67,21 @@ numberButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if (secondNumber === 0) {
+        if (secondNumber === 0 ) {
             operator = button.value;
-            secondNumber = 0;
+            if (completed !== true){
+                secondNumber = "";
+            }
+            else {
+                secondNumber = '';
+            }            
         }
         else {
             equalize();
             operator = button.value;
         }
         console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
+        updateDisplay();
     })
 })
 
@@ -120,11 +127,27 @@ percentButton.addEventListener('click', () => {
     updateDisplay();
 })
 
+backspaceButton.addEventListener('click', () => {
+    let display = document.getElementById("display");
+    let currentValue = display.innerText;
+    if (currentValue.length > 1) {
+        display.innerText = currentValue.substring(0, currentValue.length - 1);
+        memory = currentValue.substring(0, currentValue.length - 1);
+        operator = '';
+    } else {
+        display.innerText = '0';
+        memory = 0; 
+        completed = false;
+        operator = '';        
+       
+    }
+});
+
 let equalize = () => {
     switch (operator) {
         case '/':
             if (parseFloat(secondNumber) === 0) {
-                result = 1;
+                result = 0;
                 alert('Hey! Stop that...')
                 break;
             }
@@ -145,13 +168,23 @@ let equalize = () => {
             console.log('No operator selected');
             break;
     }
-    secondNumber = 0;
+    if (completed === true) {
+         secondNumber = 0;
+    }
+    else {
+         secondNumber = "";
+    }
+
     operator = '';
     memory = result;
+    completed = false;
     console.log('Memory on equals: ' + memory);
     document.getElementById('display').innerText = memory;
+    console.log(completed);
 };
+
 
 equalsButton.addEventListener('click', () => {
     equalize();
 });
+
