@@ -199,6 +199,17 @@ document.onkeydown = function (event) {
             updateDisplay();
         }
     }
+    let addOperator = () => {
+        if (secondNumber === 0) {
+            operator = evt.key;
+            secondNumber = 0;
+        }
+        else {
+            equalize();
+            operator = evt.key;
+        }
+        console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
+    }
     switch (evt.key) {
         case '0':
             addNumber();
@@ -240,28 +251,48 @@ document.onkeydown = function (event) {
             addNumber();
             console.log('HIT')
             break;
-        case '=':
-            console.log('HIT')
-            break;
         case '-':
+            addOperator();
             console.log('HIT')
             break;
         case '+':
+            addOperator();
             console.log('HIT')
             break;
         case '*':
+            addOperator();
             console.log('HIT')
             break;
         case '/':
+            addOperator();
             console.log('HIT')
             break;
         case '%':
+            addOperator();
             console.log('HIT')
             break;
         case '.':
             addDecimal();
             updateDisplay();
-            console.log('HIT')
+            console.log('HIT');
+            break;
+        case '=':
+            if (!secondNumber) {
+                return;
+            }
+            else {
+                equalize();
+            }
+            console.log('HIT');
+            break;
+        case 'Enter':
+            if (!secondNumber) {
+                return;
+            }
+            else {
+                equalize();
+            }
+            console.log('HIT');
             break;
         case 'Backspace':
             console.log('HIT');
