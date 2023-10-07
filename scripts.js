@@ -51,6 +51,10 @@ let addDecimal = () => {
     }
     console.log(hasDecimal, completed);
 };
+let calculatePercentage = () => {
+    memory *= 0.01;
+    updateDisplay();
+}
 
 let updateDisplay = () => {
     if (operator === '') {
@@ -122,8 +126,7 @@ clearButton.addEventListener('click', () => {
 });
 
 percentButton.addEventListener('click', () => {
-    memory *= 0.01;
-    updateDisplay();
+    calculatePercentage();
 })
 
 let equalize = () => {
@@ -268,7 +271,7 @@ document.onkeydown = function (event) {
             console.log('HIT')
             break;
         case '%':
-            addOperator();
+            calculatePercentage();
             console.log('HIT')
             break;
         case '.':
