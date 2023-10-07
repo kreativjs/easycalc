@@ -299,6 +299,11 @@ document.onkeydown = function (event) {
             clear();
             updateDisplay();
             break;
+        case 'Delete':
+            console.log('HIT');
+            clear();
+            updateDisplay();
+            break;
         default:
             console.log('Please use numbers!');
             break;
