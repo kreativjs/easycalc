@@ -171,35 +171,73 @@ document.onkeydown = function (event) {
     evt = event || window.Event;
     console.log(evt)
     console.log(typeof evt)
+    let addNumber = () => {
+        let memoryInt = parseFloat(memory);
+        console.log(memoryInt);
+        if (operator === '') {
+            if (memoryInt === 0 && memory !== '0.') {
+                memory = evt.key;
+                console.log('The first number is: ' + memory);
+                console.log('The first number is of type: ' + typeof memory);
+            }
+            else {
+                memory += evt.key;
+            }
+            updateDisplay();
+        }
+        else {
+            if (secondNumber === 0) {
+                secondNumber = evt.key;
+                console.log('The second number is: ' + secondNumber)
+                console.log('The second number is of type: ' + typeof secondNumber)
+            }
+            else {
+                secondNumber += evt.key;
+                console.log('The second number is: ' + secondNumber)
+                console.log('The second number is of type: ' + typeof secondNumber)
+            }
+            updateDisplay();
+        }
+    }
     switch (evt.key) {
         case '0':
+            addNumber();
             console.log('HIT')
             break;
         case '1':
+            addNumber();
             console.log('HIT')
             break;
         case '2':
+            addNumber();
             console.log('HIT')
             break;
         case '3':
+            addNumber();
             console.log('HIT')
             break;
         case '4':
+            addNumber();
             console.log('HIT')
             break;
         case '5':
+            addNumber();
             console.log('HIT')
             break;
         case '6':
+            addNumber();
             console.log('HIT')
             break;
         case '7':
+            addNumber();
             console.log('HIT')
             break;
         case '8':
+            addNumber();
             console.log('HIT')
             break;
         case '9':
+            addNumber();
             console.log('HIT')
             break;
         case '=':
@@ -231,7 +269,7 @@ document.onkeydown = function (event) {
             updateDisplay();
             break;
         default:
-            console.log('Use numbers')
+            console.log('Please use numbers!');
             break;
     }
 }
