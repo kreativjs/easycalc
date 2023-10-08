@@ -10,12 +10,13 @@ const backspaceButton = document.querySelector('#backspace');
 const displayedInt = parseInt(displayed.textContent);
 const displayedString = displayed.textContent;
 
-let memory = displayedString;
-let secondNumber = 0;
+let memory = '';
+let secondNumber = '';
 let hasDecimal = false;
 let completed = false;
 let operator = '';
 let result;
+let operatorPressed = false;
 
 console.log(memory);
 console.log(typeof memory);
@@ -44,6 +45,9 @@ numberButtons.forEach(button => {
                 console.log('The first number is: ' + memory);
                 console.log('The first number is of type: ' + typeof memory);
             }
+             else if (memory === '0.') {
+                memory = '0.' + button.value;
+            }
             else {
                 memory += button.value;
             }
@@ -51,7 +55,7 @@ numberButtons.forEach(button => {
         }
         else {
             if (secondNumber === 0) {
-                secondNumber = button.value;
+                secondNumber = "0";
                 console.log('The second number is: ' + secondNumber)
                 console.log('The second number is of type: ' + typeof secondNumber)
             }
@@ -69,15 +73,15 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (secondNumber === 0 ) {
             operator = button.value;
-            if (completed !== true){
-                secondNumber = "";
+            if (completed !== ""){
+                secondNumber = '';
             }
             else {
-                secondNumber = '';
+                secondNumber = null;
             }            
         }
         else {
-            equalize();
+            
             operator = button.value;
         }
         console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
@@ -90,7 +94,7 @@ decimalButton.addEventListener('click', () => {
     let secondNumberString = secondNumber.toString();
     if (operator === '') {
         if (memoryString.includes('.') == false) {
-            memory += '.';
+            memory += '0.';
             console.log(memory)
             console.log(parseFloat(memory))
             hasDecimal = true;
@@ -100,7 +104,7 @@ decimalButton.addEventListener('click', () => {
     }
     else {
         if (secondNumberString.includes('.') == false) {
-            secondNumber += '.';
+            secondNumber += '0.';
             updateDisplay();
         }
         else updateDisplay();
@@ -120,7 +124,7 @@ clearButton.addEventListener('click', () => {
     operator = '';
     hasDecimal = false;
     updateDisplay();
-});
+})
 
 percentButton.addEventListener('click', () => {
     memory *= 0.01;
@@ -141,7 +145,50 @@ backspaceButton.addEventListener('click', () => {
         operator = '';        
        
     }
-});
+})
+
+document.addEventListener("keydown", function (event) {
+    let key = event.key;
+    if (key === 'Backspace') {
+        if (operator === '' && secondNumber === '') {         
+            memory = memory.slice(0, -1);
+        } else if (secondNumber !== '') {           
+            secondNumber = secondNumber.slice(0, -1);
+        } else if (operator !== '') {
+            operator = '';
+        }
+        updateDisplay();
+    } 
+    if (/^[0-9.]$/.test(key)) {        
+        if (operator === '') {            
+            if (key === '.') {               
+                if (!memory.includes('.')) {
+                    memory += '0.';
+                }
+            } else {               
+                memory += key;
+            }
+        } else {            
+            if (secondNumber === '' && key === '.') {               
+                secondNumber += '0.';
+            } else if (key !== '.') {                
+                secondNumber += key;
+            }
+        }
+        updateDisplay();
+    } else if (key === '+' || key === '-' || key === '*' || key === '/') {       
+        operator = key;
+        updateDisplay();
+    } else if (key === 'Enter') {       
+        if (operator && secondNumber !== '') { 
+            equalize();
+        }
+    } else if (key === '=') {
+        if (operator && secondNumber !== '') { 
+            equalize();
+        }
+    }
+})
 
 let equalize = () => {
     switch (operator) {
@@ -185,6 +232,20 @@ let equalize = () => {
 
 
 equalsButton.addEventListener('click', () => {
-    equalize();
+    if (operator && secondNumber !== '') { 
+        equalize();
+    }
 });
+
+
+function keyboard(evt) {
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode( key );
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
 
