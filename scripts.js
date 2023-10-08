@@ -35,6 +35,10 @@ let updateDisplay = () => {
     }
 }
 
+clearButton.addEventListener('click', () => {
+    location.reload();
+})
+
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         let memoryInt = parseFloat(memory);
@@ -93,21 +97,27 @@ decimalButton.addEventListener('click', () => {
     let memoryString = memory.toString();
     let secondNumberString = secondNumber.toString();
     if (operator === '') {
-        if (memoryString.includes('.') == false) {
+        if (!hasDecimal) {
             memory += '0.';
-            console.log(memory)
-            console.log(parseFloat(memory))
+            hasDecimal = true;
+            updateDisplay();
+        } else if (!memoryString.includes('.')) {
+            memory += '.';
+            updateDisplay();
+        }
+    } else if (memory === '' || memory === '0') {
+            memory = '0.';
+        } else if (!memory.includes('.')) {
+            memory += '.';
+        } else {
+        if (!secondNumberString.includes('.')) {
+            secondNumber += '0.';
+            updateDisplay();
+        } else if (!hasDecimal) {
+            secondNumber += '.';
             hasDecimal = true;
             updateDisplay();
         }
-        else updateDisplay();
-    }
-    else {
-        if (secondNumberString.includes('.') == false) {
-            secondNumber += '0.';
-            updateDisplay();
-        }
-        else updateDisplay();
     }
     console.log(hasDecimal, completed)
 })
@@ -115,14 +125,6 @@ decimalButton.addEventListener('click', () => {
 invertButton.addEventListener('click', () => {
     memory *= -1;
     console.log(memory);
-    updateDisplay();
-})
-
-clearButton.addEventListener('click', () => {
-    memory = 0;
-    result = 0;
-    operator = '';
-    hasDecimal = false;
     updateDisplay();
 })
 
