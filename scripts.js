@@ -195,105 +195,106 @@ percentButton.addEventListener('click', () => {
     calculatePercentage();
 });
 
+let addKeyboardNumber = (evt) => {
+    let memoryInt = parseFloat(memory);
+    console.log(memoryInt);
+    if (!operator) {
+        if (memory != '0') {
+            console.log(evt.key);
+            memory += evt.key;
+            updateDisplay();
+        };
+        if (memory == '0') {
+            console.log(evt.key);
+            memory = evt.key;
+            updateDisplay();
+        };
+    }
+    else {
+        if (secondNumber != null) {
+            console.log(evt.key);
+            secondNumber += evt.key;
+            updateDisplay();
+        };
+        if (secondNumber == null) {
+            console.log(evt.key);
+            secondNumber = evt.key;
+            updateDisplay();
+        };
+    }
+};
+let addOperator = (evt) => {
+    if (!secondNumber) {
+        operator = evt.key;
+        secondNumber = null;
+    }
+    else {
+        calculate();
+        operator = evt.key;
+    }
+    console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
+};
+
 document.onkeydown = function (event) {
     evt = event || window.Event;
-    let addNumber = () => {
-        let memoryInt = parseFloat(memory);
-        console.log(memoryInt);
-        if (!operator) {
-            if (memory != '0') {
-                console.log(evt.key);
-                memory += evt.key;
-                updateDisplay();
-            };
-            if (memory == '0') {
-                console.log(evt.key);
-                memory = evt.key;
-                updateDisplay();
-            };
-        }
-        else {
-            if (secondNumber != null) {
-                console.log(evt.key);
-                secondNumber += evt.key;
-                updateDisplay();
-            };
-            if (secondNumber == null) {
-                console.log(evt.key);
-                secondNumber = evt.key;
-                updateDisplay();
-            };
-        }
-    }
-    let addOperator = () => {
-        if (!secondNumber) {
-            operator = evt.key;
-            secondNumber = null;
-        }
-        else {
-            calculate();
-            operator = evt.key;
-        }
-        console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
-    }
     switch (evt.key) {
         case '0':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '1':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '2':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '3':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '4':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '5':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '6':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '7':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '8':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '9':
-            addNumber();
+            addKeyboardNumber(evt);
             break;
         case '-':
             document.querySelector('#subtract').classList.add('myClass');
             document.querySelector('#add').classList.remove('myClass');
             document.querySelector('#divide').classList.remove('myClass');
             document.querySelector('#multiply').classList.remove('myClass');
-            addOperator();
+            addOperator(evt);
             break;
         case '+':
             document.querySelector('#add').classList.add('myClass');
             document.querySelector('#divide').classList.remove('myClass');
             document.querySelector('#multiply').classList.remove('myClass');
             document.querySelector('#subtract').classList.remove('myClass');
-            addOperator();
+            addOperator(evt);
             break;
         case '*':
             document.querySelector('#multiply').classList.add('myClass');
             document.querySelector('#subtract').classList.remove('myClass');
             document.querySelector('#add').classList.remove('myClass');
             document.querySelector('#divide').classList.remove('myClass');
-            addOperator();
+            addOperator(evt);
             break;
         case '/':
             document.querySelector('#divide').classList.add('myClass');
             document.querySelector('#multiply').classList.remove('myClass');
             document.querySelector('#subtract').classList.remove('myClass');
             document.querySelector('#add').classList.remove('myClass');
-            addOperator();
+            addOperator(evt);
             break;
         case '%':
             calculatePercentage();
