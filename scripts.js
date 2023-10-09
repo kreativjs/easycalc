@@ -144,13 +144,18 @@ numberButtons.forEach(button => {
         }
         else {
             if (secondNumber != null) {
-                if (secondNumber.length < 16) {
-                    secondNumber += button.value;
+                if (secondNumber == '0' && button.value == '0') {
                     updateDisplay();
                 }
                 else {
-                    updateDisplay();
-                    console.log("Too.... many.... numbers.. arghh..");
+                    if (secondNumber.length < 16) {
+                        secondNumber += button.value;
+                        updateDisplay();
+                    }
+                    else {
+                        updateDisplay();
+                        console.log("Too.... many.... numbers.. arghh..");
+                    }
                 }
             }
             if (secondNumber == null) {
@@ -230,7 +235,6 @@ backspaceButton.addEventListener('click', () => {
 })
 
 let addKeyboardNumber = (evt) => {
-    let memoryInt = parseFloat(memory);
     if (!operator) {
         if (memory != '0') {
             if (memory.length < 16) {
@@ -249,13 +253,18 @@ let addKeyboardNumber = (evt) => {
     }
     else {
         if (secondNumber != null) {
-            if (secondNumber.length < 16) {
-                secondNumber += evt.key;
+            if (secondNumber == '0' && evt.key == '0') {
                 updateDisplay();
             }
             else {
-                updateDisplay();
-                console.log("Too.... many.... numbers.. arghh..");
+                if (secondNumber.length < 16) {
+                    secondNumber += evt.key;
+                    updateDisplay();
+                }
+                else {
+                    updateDisplay();
+                    console.log("Too.... many.... numbers.. arghh..");
+                }
             }
         };
         if (secondNumber == null) {
@@ -278,6 +287,7 @@ let addOperator = (evt) => {
 
 document.onkeydown = function (event) {
     evt = event || window.Event;
+    console.log(evt.key)
     switch (evt.key) {
         case '0':
             addKeyboardNumber(evt);
