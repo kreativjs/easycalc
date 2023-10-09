@@ -66,7 +66,7 @@ let updateDisplay = () => {
         document.getElementById('display').innerText = memory;
     }
     else {
-        document.getElementById('display').innerText = secondNumber;
+        document.getElementById('display').innerText = memory + operator + secondNumber;
     }
 };
 let calculate = () => {
