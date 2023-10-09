@@ -12,7 +12,6 @@ const displayedString = displayed.textContent;
 
 let memory = displayedString;
 let secondNumber = null;
-// let hasDecimal = false;
 let completed = false;
 let operator = null;
 let result;
@@ -32,7 +31,6 @@ let clear = () => {
     result = 0;
     operator = null;
     secondNumber = null;
-    // hasDecimal = false;
     completed = false;
     clearColors();
 };
@@ -59,9 +57,6 @@ let addDecimal = () => {
         let memoryString = memory.toString();
         if (memoryString.includes('.') == false) {
             memory += '.';
-            // console.log(memory)
-            // console.log(parseFloat(memory))
-            // hasDecimal = true;
             updateDisplay();
         }
         else updateDisplay();
@@ -85,7 +80,6 @@ let addDecimal = () => {
             else updateDisplay();
         }
     }
-    // console.log(hasDecimal, completed);
 };
 let calculatePercentage = () => {
     memory *= 0.01;
@@ -134,11 +128,8 @@ numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (!operator) {
             if (memory != '0') {
-                // console.log(button.value);
                 if (memory.length < 16) {
                     memory += button.value;
-                    // console.log('Memory length: ' + memory.length);
-                    // console.log(typeof memory);
                     updateDisplay();
                 }
                 else {
@@ -147,7 +138,6 @@ numberButtons.forEach(button => {
                 }
             };
             if (memory == '0') {
-                // console.log(button.value);
                 memory = button.value;
                 updateDisplay();
             };
@@ -155,7 +145,6 @@ numberButtons.forEach(button => {
         else {
             if (secondNumber != null) {
                 if (secondNumber.length < 16) {
-                    // console.log(button.value);
                     secondNumber += button.value;
                     updateDisplay();
                 }
@@ -165,7 +154,6 @@ numberButtons.forEach(button => {
                 }
             }
             if (secondNumber == null) {
-                // console.log(button.value);
                 secondNumber = button.value;
                 updateDisplay();
             }
@@ -228,7 +216,6 @@ decimalButton.addEventListener('click', () => {
 });
 invertButton.addEventListener('click', () => {
     memory *= -1;
-    // console.log(memory);
     updateDisplay();
 });
 clearButton.addEventListener('click', () => {
@@ -244,11 +231,9 @@ backspaceButton.addEventListener('click', () => {
 
 let addKeyboardNumber = (evt) => {
     let memoryInt = parseFloat(memory);
-    // console.log(memoryInt);
     if (!operator) {
         if (memory != '0') {
             if (memory.length < 16) {
-                // console.log(evt.key);
                 memory += evt.key;
                 updateDisplay();
             }
@@ -258,7 +243,6 @@ let addKeyboardNumber = (evt) => {
             }
         };
         if (memory == '0') {
-            // console.log(evt.key);
             memory = evt.key;
             updateDisplay();
         };
@@ -266,7 +250,6 @@ let addKeyboardNumber = (evt) => {
     else {
         if (secondNumber != null) {
             if (secondNumber.length < 16) {
-                // console.log(evt.key);
                 secondNumber += evt.key;
                 updateDisplay();
             }
@@ -276,7 +259,6 @@ let addKeyboardNumber = (evt) => {
             }
         };
         if (secondNumber == null) {
-            // console.log(evt.key);
             secondNumber = evt.key;
             updateDisplay();
         };
@@ -360,7 +342,6 @@ document.onkeydown = function (event) {
             break;
         case '.':
             addDecimal();
-            // updateDisplay();
             break;
         case '=':
             if (!secondNumber) {
