@@ -16,13 +16,16 @@ let completed = false;
 let operator = null;
 let result;
 
-console.log(memory);
-console.log(typeof memory);
-
 let addition = () => result = parseFloat(memory) + parseFloat(secondNumber);
 let subtraction = () => result = parseFloat(memory) - parseFloat(secondNumber);
 let multiplication = () => result = parseFloat(memory) * parseFloat(secondNumber);
 let division = () => result = parseFloat(memory) / parseFloat(secondNumber);
+let clearColors = () => {
+    document.querySelector('#divide').classList.remove('myClass');
+    document.querySelector('#multiply').classList.remove('myClass');
+    document.querySelector('#subtract').classList.remove('myClass');
+    document.querySelector('#add').classList.remove('myClass');
+}
 let clear = () => {
     memory = 0;
     result = 0;
@@ -30,10 +33,7 @@ let clear = () => {
     secondNumber = null;
     hasDecimal = false;
     completed = false;
-    document.querySelector('#divide').classList.remove('myClass');
-    document.querySelector('#multiply').classList.remove('myClass');
-    document.querySelector('#subtract').classList.remove('myClass');
-    document.querySelector('#add').classList.remove('myClass');
+    clearColors();
 };
 let addDecimal = () => {
     if (!secondNumber) {
@@ -100,12 +100,6 @@ let calculate = () => {
     console.log('Memory on equals: ' + memory);
     document.getElementById('display').innerText = memory;
 };
-let clearColors = () => {
-    document.querySelector('#divide').classList.remove('myClass');
-    document.querySelector('#multiply').classList.remove('myClass');
-    document.querySelector('#subtract').classList.remove('myClass');
-    document.querySelector('#add').classList.remove('myClass');
-}
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (!operator) {
@@ -203,8 +197,6 @@ percentButton.addEventListener('click', () => {
 
 document.onkeydown = function (event) {
     evt = event || window.Event;
-    console.log(evt)
-    console.log(typeof evt)
     let addNumber = () => {
         let memoryInt = parseFloat(memory);
         console.log(memoryInt);
@@ -247,43 +239,33 @@ document.onkeydown = function (event) {
     switch (evt.key) {
         case '0':
             addNumber();
-            console.log('HIT')
             break;
         case '1':
             addNumber();
-            console.log('HIT')
             break;
         case '2':
             addNumber();
-            console.log('HIT')
             break;
         case '3':
             addNumber();
-            console.log('HIT')
             break;
         case '4':
             addNumber();
-            console.log('HIT')
             break;
         case '5':
             addNumber();
-            console.log('HIT')
             break;
         case '6':
             addNumber();
-            console.log('HIT')
             break;
         case '7':
             addNumber();
-            console.log('HIT')
             break;
         case '8':
             addNumber();
-            console.log('HIT')
             break;
         case '9':
             addNumber();
-            console.log('HIT')
             break;
         case '-':
             document.querySelector('#subtract').classList.add('myClass');
@@ -291,7 +273,6 @@ document.onkeydown = function (event) {
             document.querySelector('#divide').classList.remove('myClass');
             document.querySelector('#multiply').classList.remove('myClass');
             addOperator();
-            console.log('HIT')
             break;
         case '+':
             document.querySelector('#add').classList.add('myClass');
@@ -299,7 +280,6 @@ document.onkeydown = function (event) {
             document.querySelector('#multiply').classList.remove('myClass');
             document.querySelector('#subtract').classList.remove('myClass');
             addOperator();
-            console.log('HIT')
             break;
         case '*':
             document.querySelector('#multiply').classList.add('myClass');
@@ -307,7 +287,6 @@ document.onkeydown = function (event) {
             document.querySelector('#add').classList.remove('myClass');
             document.querySelector('#divide').classList.remove('myClass');
             addOperator();
-            console.log('HIT')
             break;
         case '/':
             document.querySelector('#divide').classList.add('myClass');
@@ -315,16 +294,13 @@ document.onkeydown = function (event) {
             document.querySelector('#subtract').classList.remove('myClass');
             document.querySelector('#add').classList.remove('myClass');
             addOperator();
-            console.log('HIT')
             break;
         case '%':
             calculatePercentage();
-            console.log('HIT')
             break;
         case '.':
             addDecimal();
             updateDisplay();
-            console.log('HIT');
             break;
         case '=':
             if (!secondNumber) {
@@ -334,7 +310,6 @@ document.onkeydown = function (event) {
                 calculate();
                 clearColors();
             }
-            console.log('HIT');
             break;
         case 'Enter':
             if (!secondNumber) {
@@ -344,20 +319,16 @@ document.onkeydown = function (event) {
                 calculate();
                 clearColors();
             }
-            console.log('HIT');
             break;
         case 'Backspace':
-            console.log('HIT');
             clear();
             updateDisplay();
             break;
         case 'Delete':
-            console.log('HIT');
             clear();
             updateDisplay();
             break;
         default:
-            console.log('Please use numbers!');
             break;
     }
 }
