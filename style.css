@@ -1,82 +1,102 @@
-@import url('https://fonts.googleapis.com/css?family=Audiowide');
-
-.body {
-  width: 350px;
-  border: 1px solid;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 0 5px 20px;
-  background: #D7CCC8;
-  border-radius: 10px;
-  -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75), inset -3px -2px 19px 1px rgba(84,83,84,1);
-  -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75), inset -3px -2px 19px 1px rgba(84,83,84,1);
-  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75), inset -3px -2px 19px 1px rgba(84,83,84,1);
-}
-.results {
-  width: 92.3%;
-  margin: 20px auto;
-  font-family: 'Audiowide', cursive;
-  text-align: right;
-}
-#expression, #result {
-  background: #607D8B;
-  border: 1px solid black;
-  border-radius: 4px;
-  padding-right: 5px;
-}
-#result {
-  height: 50px;
-  font-size: 2em;
-  border-bottom: none;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-#expression {
-  height: 20px;
-  border-top: none;
-  color: #263238;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  overflow: hidden;
+@font-face {
+    font-family: 'Roboto-Bold', sans-serif;
+    src: url('./fonts/Roboto-Bold.ttf') format('truetype');
 }
 
-.numbers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.operations, .clears {
-  display: flex;
-  flex-direction: column;
-}
-.operations * {
-  font-size: 1.5em;
+@font-face {
+    font-family: 'Roboto-Italic', sans-serif;
+    src: url('./fonts/Roboto-Italic.ttf') format('truetype');
+    font-style: italic;
 }
 
-.clears * {
-  background: #EF5350;
-  color: white;
+@font-face {
+    font-family: 'Roboto-Regular', sans-serif;
+    src: url('./fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto-Thin', sans-serif;
+    src: url('./fonts/Roboto-Thin.ttf') format('truetype');
+}
+
+* {
+    color: #1F2937;
+    font-family: 'Roboto-Medium', sans-serif;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
 }
 
 button {
-  border: none;
-  border-radius: 5px;
-  width: 50px;
-  height: 50px;
-  margin: 5px;
-  text-align: center;
-  outline: none;
-  font-family: 'Audiowide', cursive;
-  -webkit-box-shadow: 0px 3px 0px 0px #212121;
-  -moz-box-shadow: 0px 3px 0px 0px #212121;
-  box-shadow: 0px 3px 0px 0px #212121;
-}
-button:active {
-  transform: translateY(2px);
+    background-color: #4CAF50;
+    border: solid 0.5px;
+    border-color: #1F2937;
+    color: white;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    width: 105px;
+    height: 80px;
 }
 
-.number, .operation, .equals {
-  background: #263238;
-  color: white;
+button:hover {
+    background-color: #387d3a;
+    border: solid 0.5px;
+    border-color: #1F2937;
+    color: white;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    width: 105px;
+    height: 80px;
+}
+
+button::after {
+    background-color: red;
+}
+
+.myClass {
+    background-color: #1a3a1b;
+    color: white;
+}
+
+.container {
+    position: absolute;
+    width: 425px;
+    height: fit-content;
+    background-color: rgb(96, 67, 4);
+    display: block;
+    align-content: center;
+    align-items: center;
+    border: solid 1px;
+}
+
+#display {
+    word-wrap: break-word;
+    background-color: lightgrey;
+    text-align: end;
+    font-size: 40px;
+    padding-right: 1vh;
+    border: solid 0.5px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width: 430px) {
+    body {
+        background-color: lightgreen;
+        margin-top: 1vh;
+        margin-right: 1vh;
+    }
 }
