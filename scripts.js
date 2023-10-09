@@ -11,7 +11,7 @@ const displayedString = displayed.textContent;
 
 let memory = displayedString;
 let secondNumber = null;
-let hasDecimal = false;
+// let hasDecimal = false;
 let completed = false;
 let operator = null;
 let result;
@@ -31,7 +31,7 @@ let clear = () => {
     result = 0;
     operator = null;
     secondNumber = null;
-    hasDecimal = false;
+    // hasDecimal = false;
     completed = false;
     clearColors();
 };
@@ -54,24 +54,35 @@ let deleteDigit = () => {
     }
 }
 let addDecimal = () => {
-    if (!secondNumber) {
+    if (!operator) {
         let memoryString = memory.toString();
         if (memoryString.includes('.') == false) {
             memory += '.';
             // console.log(memory)
             // console.log(parseFloat(memory))
-            hasDecimal = true;
+            // hasDecimal = true;
             updateDisplay();
         }
         else updateDisplay();
     }
     else {
-        let secondNumberString = secondNumber.toString();
-        if (secondNumberString.includes('.') == false) {
-            secondNumber += '.';
-            updateDisplay();
+        if (!secondNumber) {
+            secondNumber = 0;
+            let secondNumberString = secondNumber.toString();
+            if (secondNumberString.includes('.') == false) {
+                secondNumber += '.';
+                updateDisplay();
+            }
+            else updateDisplay();
         }
-        else updateDisplay();
+        else {
+            let secondNumberString = secondNumber.toString();
+            if (secondNumberString.includes('.') == false) {
+                secondNumber += '.';
+                updateDisplay();
+            }
+            else updateDisplay();
+        }
     }
     // console.log(hasDecimal, completed);
 };
@@ -80,7 +91,7 @@ let calculatePercentage = () => {
     updateDisplay();
 };
 let updateDisplay = () => {
-    if (!operator) {
+    if (!operator || !secondNumber) {
         document.getElementById('display').innerText = memory;
     }
     else {
@@ -345,7 +356,7 @@ document.onkeydown = function (event) {
             break;
         case '.':
             addDecimal();
-            updateDisplay();
+            // updateDisplay();
             break;
         case '=':
             if (!secondNumber) {
