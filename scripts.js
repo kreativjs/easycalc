@@ -10,10 +10,10 @@ const displayedInt = parseInt(displayed.textContent);
 const displayedString = displayed.textContent;
 
 let memory = displayedString;
-let secondNumber = 0;
+let secondNumber = null;
 let hasDecimal = false;
 let completed = false;
-let operator = '';
+let operator = null;
 let result;
 
 console.log(memory);
@@ -26,13 +26,14 @@ let division = () => result = parseFloat(memory) / parseFloat(secondNumber);
 let clear = () => {
     memory = 0;
     result = 0;
-    operator = '';
+    operator = null;
+    secondNumber = null;
     hasDecimal = false;
+    completed = false;
 };
 let addDecimal = () => {
-    let memoryString = memory.toString();
-    let secondNumberString = secondNumber.toString();
-    if (operator === '') {
+    if (!secondNumber) {
+        let memoryString = memory.toString();
         if (memoryString.includes('.') == false) {
             memory += '.';
             console.log(memory)
@@ -43,6 +44,7 @@ let addDecimal = () => {
         else updateDisplay();
     }
     else {
+        let secondNumberString = secondNumber.toString();
         if (secondNumberString.includes('.') == false) {
             secondNumber += '.';
             updateDisplay();
@@ -54,82 +56,16 @@ let addDecimal = () => {
 let calculatePercentage = () => {
     memory *= 0.01;
     updateDisplay();
-}
-
+};
 let updateDisplay = () => {
-    if (operator === '') {
+    if (!operator) {
         document.getElementById('display').innerText = memory;
     }
     else {
         document.getElementById('display').innerText = secondNumber;
     }
-}
-
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        let memoryInt = parseFloat(memory);
-        console.log(memoryInt)
-        if (operator === '') {
-            if (memoryInt === 0 && memory !== '0.') {
-                memory = button.value;
-                console.log('The first number is: ' + memory);
-                console.log('The first number is of type: ' + typeof memory);
-            }
-            else {
-                memory += button.value;
-            }
-            updateDisplay();
-        }
-        else {
-            if (secondNumber === 0) {
-                secondNumber = button.value;
-                console.log('The second number is: ' + secondNumber)
-                console.log('The second number is of type: ' + typeof secondNumber)
-            }
-            else {
-                secondNumber += button.value;
-                console.log('The second number is: ' + secondNumber)
-                console.log('The second number is of type: ' + typeof secondNumber)
-            }
-            updateDisplay();
-        }
-    })
-})
-
-operatorButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        if (secondNumber === 0) {
-            operator = button.value;
-            secondNumber = 0;
-        }
-        else {
-            equalize();
-            operator = button.value;
-        }
-        console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
-    })
-})
-
-decimalButton.addEventListener('click', () => {
-    addDecimal();
-})
-
-invertButton.addEventListener('click', () => {
-    memory *= -1;
-    console.log(memory);
-    updateDisplay();
-})
-
-clearButton.addEventListener('click', () => {
-    clear();
-    updateDisplay();
-});
-
-percentButton.addEventListener('click', () => {
-    calculatePercentage();
-})
-
-let equalize = () => {
+};
+let calculate = () => {
     switch (operator) {
         case '/':
             if (parseFloat(secondNumber) === 0) {
@@ -154,20 +90,76 @@ let equalize = () => {
             console.log('No operator selected');
             break;
     }
-    secondNumber = 0;
-    operator = '';
+    secondNumber = null;
+    operator = null;
     memory = result;
     console.log('Memory on equals: ' + memory);
     document.getElementById('display').innerText = memory;
 };
-
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (!operator) {
+            if (memory != '0') {
+                console.log(button.value);
+                memory += button.value;
+                updateDisplay();
+            };
+            if (memory == '0') {
+                console.log(button.value);
+                memory = button.value;
+                updateDisplay();
+            };
+        }
+        else {
+            if (secondNumber != null) {
+                console.log(button.value);
+                secondNumber += button.value;
+                updateDisplay();
+            };
+            if (secondNumber == null) {
+                console.log(button.value);
+                secondNumber = button.value;
+                updateDisplay();
+            };
+        }
+    });
+});
+operatorButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (secondNumber == null) {
+            operator = button.value;
+        }
+        else {
+            calculate();
+            operator = button.value;
+        }
+        console.log('New operator selected: ' + operator + ' ... ' + typeof operator);
+    })
+});
 equalsButton.addEventListener('click', () => {
     if (!secondNumber) {
+        console.log('Not enough numbers here...');
         return;
     }
     else {
-        equalize();
+        calculate();
+        updateDisplay();
     }
+});
+decimalButton.addEventListener('click', () => {
+    addDecimal();
+});
+invertButton.addEventListener('click', () => {
+    memory *= -1;
+    console.log(memory);
+    updateDisplay();
+});
+clearButton.addEventListener('click', () => {
+    clear();
+    updateDisplay();
+});
+percentButton.addEventListener('click', () => {
+    calculatePercentage();
 });
 
 document.onkeydown = function (event) {
@@ -177,38 +169,38 @@ document.onkeydown = function (event) {
     let addNumber = () => {
         let memoryInt = parseFloat(memory);
         console.log(memoryInt);
-        if (operator === '') {
-            if (memoryInt === 0 && memory !== '0.') {
-                memory = evt.key;
-                console.log('The first number is: ' + memory);
-                console.log('The first number is of type: ' + typeof memory);
-            }
-            else {
+        if (!operator) {
+            if (memory != '0') {
+                console.log(evt.key);
                 memory += evt.key;
-            }
-            updateDisplay();
+                updateDisplay();
+            };
+            if (memory == '0') {
+                console.log(evt.key);
+                memory = evt.key;
+                updateDisplay();
+            };
         }
         else {
-            if (secondNumber === 0) {
-                secondNumber = evt.key;
-                console.log('The second number is: ' + secondNumber)
-                console.log('The second number is of type: ' + typeof secondNumber)
-            }
-            else {
+            if (secondNumber != null) {
+                console.log(evt.key);
                 secondNumber += evt.key;
-                console.log('The second number is: ' + secondNumber)
-                console.log('The second number is of type: ' + typeof secondNumber)
-            }
-            updateDisplay();
+                updateDisplay();
+            };
+            if (secondNumber == null) {
+                console.log(evt.key);
+                secondNumber = evt.key;
+                updateDisplay();
+            };
         }
     }
     let addOperator = () => {
-        if (secondNumber === 0) {
+        if (!secondNumber) {
             operator = evt.key;
-            secondNumber = 0;
+            secondNumber = null;
         }
         else {
-            equalize();
+            calculate();
             operator = evt.key;
         }
         console.log('New operator selected: ' + operator + ' ... ' + typeof operator)
@@ -284,7 +276,7 @@ document.onkeydown = function (event) {
                 return;
             }
             else {
-                equalize();
+                calculate();
             }
             console.log('HIT');
             break;
@@ -293,7 +285,7 @@ document.onkeydown = function (event) {
                 return;
             }
             else {
-                equalize();
+                calculate();
             }
             console.log('HIT');
             break;
