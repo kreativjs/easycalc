@@ -12,32 +12,40 @@
 
 <body>
     <main class="main">
-        <div class="container">
-            <button type="text" id="display" value="0" maxlength="4" onkeypress="keyboard(evt)">0</button>
-            <div class="flex-container" id="buttonpad">
-                <button type="button" class="clear" value="clear" id="clear">AC</button>
-                <button type="button" class="sign" value="sign" id="sign">+/-</button>
-                <button type="button" class="percent" value="percent" id="percent">%</button>
-                <button type="button" class="operator" value="/" id="divide">/</button>
-                <button type="button" class="operand" value="7" id="7">7</button>
-                <button type="button" class="operand" value="8" id="8">8</button>
-                <button type="button" class="operand" value="9" id="9">9</button>
-                <button type="button" class="operator" value="*" id="multiply">*</button>
-                <button type="button" class="operand" value="4" id="4">4</button>
-                <button type="button" class="operand" value="5" id="5">5</button>
-                <button type="button" class="operand" value="6" id="6">6</button>
-                <button type="button" class="operator" value="-" id="subtract">-</button>
-                <button type="button" class="operand" value="1" id="1">1</button>
-                <button type="button" class="operand" value="2" id="2">2</button>
-                <button type="button" class="operand" value="3" id="3">3</button>
-                <button type="button" class="operator" value="+" id="add">+</button>
-                <button type="button" class="backspace" value="backspace" id="backspace">Backspace</button>
-                <button type="button" class="operand" value="0" id="zero">0</button>
-                <button type="button" class="decimal" value="." id="decimal">.</button>
-                <button type="button" class="equals" value="=" id="equals">=</button>                
-            </div>
-            </div>
-        </div>
+       <div class="body">
+  <div class="results">
+    <div id="result"></div>
+    <div id="expression"></div>
+  </div>
+  <div class="numbers">
+    <button class="number" id="7">7</button>
+    <button class="number" id="8">8</button>
+    <button class="number" id="9">9</button>
+    
+    <button class="number" id="4">4</button>
+    <button class="number" id="5">5</button>
+    <button class="number" id="6">6</button>
+    
+    <button class="number" id="1">1</button>
+    <button class="number" id="2">2</button>
+    <button class="number" id="3">3</button>
+    
+    <button class="number" id="0">0</button>
+    <button class="number" id=".">.</button>
+    <button class="equals" id="=">=</button>
+  </div>
+  
+  <div class="operations">
+    <button class="operation" id="*">×</button>
+    <button class="operation" id="/">÷</button>
+    <button class="operation" id="+">+</button>
+    <button class="operation" id="-">-</button>
+  </div>
+  <div class="clears">
+    <button id="clear">AC</button>
+    <button id="ce">CE</button>
+  </div>
+</div>
     </main>
 </body>
 </html>
