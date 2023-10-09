@@ -35,6 +35,25 @@ let clear = () => {
     completed = false;
     clearColors();
 };
+let deleteDigit = () => {
+    if (!operator) {
+        let memoryString = memory.toString();
+        console.log('Memory pre-slice: ' + memory);
+        memory = memoryString.substring(0, memoryString.length - 1);
+        updateDisplay();
+        console.log('Memory post-slice: ' + memory);
+    }
+    if (!operator && !!secondNumber) {
+        updateDisplay();
+    }
+    if (operator && secondNumber) {
+        let secondNumberString = secondNumber.toString();
+        console.log('SecondNumber pre-slice: ' + secondNumber);
+        secondNumber = secondNumberString.substring(0, secondNumberString.length - 1);
+        updateDisplay();
+        console.log('SecondNumber post-slice: ' + secondNumber)
+    }
+}
 let addDecimal = () => {
     if (!secondNumber) {
         let memoryString = memory.toString();
@@ -278,6 +297,12 @@ document.onkeydown = function (event) {
             break;
         case '9':
             addKeyboardNumber(evt);
+            break;
+        case 'b':
+            deleteDigit();
+            break;
+        case 'B':
+            deleteDigit();
             break;
         case '-':
             document.querySelector('#subtract').classList.add('myClass');
