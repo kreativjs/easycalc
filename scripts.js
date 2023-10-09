@@ -6,6 +6,7 @@ const invertButton = document.querySelector('.sign');
 const percentButton = document.querySelector('#percent');
 const equalsButton = document.querySelector('#equals');
 const displayed = document.querySelector('#display');
+const backspaceButton = document.querySelector('#backspace')
 const displayedInt = parseInt(displayed.textContent);
 const displayedString = displayed.textContent;
 
@@ -237,6 +238,9 @@ clearButton.addEventListener('click', () => {
 percentButton.addEventListener('click', () => {
     calculatePercentage();
 });
+backspaceButton.addEventListener('click', () => {
+    deleteDigit();
+})
 
 let addKeyboardNumber = (evt) => {
     let memoryInt = parseFloat(memory);
