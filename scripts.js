@@ -105,8 +105,13 @@ numberButtons.forEach(button => {
         if (!operator) {
             if (memory != '0') {
                 console.log(button.value);
-                memory += button.value;
-                updateDisplay();
+                if (memory.length < 16) {
+                    memory += button.value;
+                    console.log('Memory length: ' + memory.length);
+                    console.log(typeof memory);
+                    updateDisplay();
+                }
+                else updateDisplay();
             };
             if (memory == '0') {
                 console.log(button.value);
@@ -200,9 +205,12 @@ let addKeyboardNumber = (evt) => {
     console.log(memoryInt);
     if (!operator) {
         if (memory != '0') {
-            console.log(evt.key);
-            memory += evt.key;
-            updateDisplay();
+            if (memory.length < 16) {
+                console.log(evt.key);
+                memory += evt.key;
+                updateDisplay();
+            }
+            else updateDisplay();
         };
         if (memory == '0') {
             console.log(evt.key);
@@ -212,9 +220,12 @@ let addKeyboardNumber = (evt) => {
     }
     else {
         if (secondNumber != null) {
-            console.log(evt.key);
-            secondNumber += evt.key;
-            updateDisplay();
+            if (secondNumber.length < 16) {
+                console.log(evt.key);
+                secondNumber += evt.key;
+                updateDisplay();
+            }
+            else updateDisplay();
         };
         if (secondNumber == null) {
             console.log(evt.key);

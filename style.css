@@ -78,6 +78,7 @@ button::after {
 }
 
 #display {
+    word-wrap: break-word;
     background-color: lightgrey;
     text-align: end;
     font-size: 40px;
