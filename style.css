@@ -93,10 +93,6 @@ button::after {
     justify-content: space-evenly;
 }
 
-/* #zero { */
-    /* width: 211px; */
-/* } */
-
 @media screen and (max-width: 430px) {
     body {
         background-color: lightgreen;
