@@ -35,9 +35,6 @@ let clear = () => {
     document.querySelector('#subtract').classList.remove('myClass');
     document.querySelector('#add').classList.remove('myClass');
 };
-// let refreshOperatorColor = () => {
-//     document.querySelector('#equals').classList.add('myClass');
-// }
 let addDecimal = () => {
     if (!secondNumber) {
         let memoryString = memory.toString();
@@ -103,6 +100,12 @@ let calculate = () => {
     console.log('Memory on equals: ' + memory);
     document.getElementById('display').innerText = memory;
 };
+let clearColors = () => {
+    document.querySelector('#divide').classList.remove('myClass');
+    document.querySelector('#multiply').classList.remove('myClass');
+    document.querySelector('#subtract').classList.remove('myClass');
+    document.querySelector('#add').classList.remove('myClass');
+}
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (!operator) {
@@ -178,6 +181,7 @@ equalsButton.addEventListener('click', () => {
     }
     else {
         calculate();
+        clearColors();
         updateDisplay();
     }
 });
@@ -328,6 +332,7 @@ document.onkeydown = function (event) {
             }
             else {
                 calculate();
+                clearColors();
             }
             console.log('HIT');
             break;
@@ -337,6 +342,7 @@ document.onkeydown = function (event) {
             }
             else {
                 calculate();
+                clearColors();
             }
             console.log('HIT');
             break;
