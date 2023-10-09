@@ -129,7 +129,10 @@ numberButtons.forEach(button => {
                     // console.log(typeof memory);
                     updateDisplay();
                 }
-                else updateDisplay();
+                else {
+                    updateDisplay();
+                    console.log("Too.... many.... numbers.. arghh..");
+                }
             };
             if (memory == '0') {
                 // console.log(button.value);
@@ -139,15 +142,21 @@ numberButtons.forEach(button => {
         }
         else {
             if (secondNumber != null) {
-                // console.log(button.value);
-                secondNumber += button.value;
-                updateDisplay();
-            };
+                if (secondNumber.length < 16) {
+                    // console.log(button.value);
+                    secondNumber += button.value;
+                    updateDisplay();
+                }
+                else {
+                    updateDisplay();
+                    console.log("Too.... many.... numbers.. arghh..");
+                }
+            }
             if (secondNumber == null) {
                 // console.log(button.value);
                 secondNumber = button.value;
                 updateDisplay();
-            };
+            }
         }
     });
 });
@@ -228,7 +237,10 @@ let addKeyboardNumber = (evt) => {
                 memory += evt.key;
                 updateDisplay();
             }
-            else updateDisplay();
+            else {
+                updateDisplay();
+                console.log("Too.... many.... numbers.. arghh..");
+            }
         };
         if (memory == '0') {
             // console.log(evt.key);
@@ -243,7 +255,10 @@ let addKeyboardNumber = (evt) => {
                 secondNumber += evt.key;
                 updateDisplay();
             }
-            else updateDisplay();
+            else {
+                updateDisplay();
+                console.log("Too.... many.... numbers.. arghh..");
+            }
         };
         if (secondNumber == null) {
             // console.log(evt.key);
