@@ -30,7 +30,14 @@ let clear = () => {
     secondNumber = null;
     hasDecimal = false;
     completed = false;
+    document.querySelector('#divide').classList.remove('myClass');
+    document.querySelector('#multiply').classList.remove('myClass');
+    document.querySelector('#subtract').classList.remove('myClass');
+    document.querySelector('#add').classList.remove('myClass');
 };
+// let refreshOperatorColor = () => {
+//     document.querySelector('#equals').classList.add('myClass');
+// }
 let addDecimal = () => {
     if (!secondNumber) {
         let memoryString = memory.toString();
@@ -134,6 +141,34 @@ operatorButtons.forEach(button => {
             operator = button.value;
         }
         console.log('New operator selected: ' + operator + ' ... ' + typeof operator);
+        switch (operator) {
+            case '/':
+                document.querySelector('#divide').classList.add('myClass');
+                document.querySelector('#multiply').classList.remove('myClass');
+                document.querySelector('#subtract').classList.remove('myClass');
+                document.querySelector('#add').classList.remove('myClass');
+                break;
+            case '*':
+                document.querySelector('#multiply').classList.add('myClass');
+                document.querySelector('#subtract').classList.remove('myClass');
+                document.querySelector('#add').classList.remove('myClass');
+                document.querySelector('#divide').classList.remove('myClass');
+                break;
+            case '-':
+                document.querySelector('#subtract').classList.add('myClass');
+                document.querySelector('#add').classList.remove('myClass');
+                document.querySelector('#divide').classList.remove('myClass');
+                document.querySelector('#multiply').classList.remove('myClass');
+                break;
+            case '+':
+                document.querySelector('#add').classList.add('myClass');
+                document.querySelector('#divide').classList.remove('myClass');
+                document.querySelector('#multiply').classList.remove('myClass');
+                document.querySelector('#subtract').classList.remove('myClass');
+                break;
+            default:
+                break;
+        }
     })
 });
 equalsButton.addEventListener('click', () => {
@@ -247,18 +282,34 @@ document.onkeydown = function (event) {
             console.log('HIT')
             break;
         case '-':
+            document.querySelector('#subtract').classList.add('myClass');
+            document.querySelector('#add').classList.remove('myClass');
+            document.querySelector('#divide').classList.remove('myClass');
+            document.querySelector('#multiply').classList.remove('myClass');
             addOperator();
             console.log('HIT')
             break;
         case '+':
+            document.querySelector('#add').classList.add('myClass');
+            document.querySelector('#divide').classList.remove('myClass');
+            document.querySelector('#multiply').classList.remove('myClass');
+            document.querySelector('#subtract').classList.remove('myClass');
             addOperator();
             console.log('HIT')
             break;
         case '*':
+            document.querySelector('#multiply').classList.add('myClass');
+            document.querySelector('#subtract').classList.remove('myClass');
+            document.querySelector('#add').classList.remove('myClass');
+            document.querySelector('#divide').classList.remove('myClass');
             addOperator();
             console.log('HIT')
             break;
         case '/':
+            document.querySelector('#divide').classList.add('myClass');
+            document.querySelector('#multiply').classList.remove('myClass');
+            document.querySelector('#subtract').classList.remove('myClass');
+            document.querySelector('#add').classList.remove('myClass');
             addOperator();
             console.log('HIT')
             break;
