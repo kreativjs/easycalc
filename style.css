@@ -80,3 +80,18 @@ button:active {
   background: #263238;
   color: white;
 }
+
+#backspace {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+#sign {
+  font-size: 20px;
+  background: #263238; 
+}
+
+#percent {
+  font-size: 23px;
+  background: #263238; 
+}
